@@ -1,3 +1,4 @@
+const axios = require('axios');
 var blessed = require('blessed')
   , contrib = require('../index')
 
@@ -87,10 +88,13 @@ setInterval(generateTableOrder, 3000)
 
 //set log dummy data
 setInterval(function() {
-  var rnd = Math.round(Math.random()*2)
+  var rnd = Math.round(Math.random()*3)
   if (rnd==0) log.log('on md last price: ' + commands[Math.round(Math.random()*(commands.length-1))])   
   else if (rnd==1) log.log('sign ' + servers[Math.round(Math.random()*(servers.length-1))])
   else if (rnd==2) log.log('call after: ' + Math.random().toFixed(2))
+  else if (rnd==3){
+    axios.get('https://www.baidu.com/sugrec').then(function(response){log.log('queryid is '+response.data.queryid)})
+  }
   screen.render()
 }, 500)
 
